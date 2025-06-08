@@ -1,22 +1,17 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Livro } from '../livro/livro.entity';
 
 @Entity('book_reviews')
 export class BookReview {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  bookTitle: string;
-
-  @Column()
-  reviewerName: string;
-
   @Column('text')
-  reviewText: string;
+  comentario: string;
 
   @Column({ type: 'integer' })
-  rating: number;
+  nota: number;
 
-  @Column({ default: false })
-  recommended: boolean;
+  @ManyToOne(() => Livro, livro => livro.reviews, { onDelete: 'CASCADE' })
+  livro: Livro;
 }

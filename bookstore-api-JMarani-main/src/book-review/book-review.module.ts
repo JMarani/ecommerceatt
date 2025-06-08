@@ -1,12 +1,13 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { BookReview } from './book-review.entity';
+import { Livro } from '../livro/livro.entity';
 import { BookReviewRepository } from './book-review.repository';
 import { BookReviewService } from './book-review.service';
 import { BookReviewController } from './book-review.controller';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([BookReview])],
+  imports: [TypeOrmModule.forFeature([BookReview, Livro])],
   controllers: [BookReviewController],
   providers: [BookReviewService, BookReviewRepository],
 })
